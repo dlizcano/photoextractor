@@ -1,12 +1,10 @@
 Package: photoextractor
-Title: Extract Pictograms from Camera Trap Videos with Metadata Preservation
+Title: Extract Pictograms from Videos with Metadata Preservation
 Version: 0.1.0
 Authors@R: 
     person("Diego J.", "Lizcano", , "dj.lizcano@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9648-0576"))
-Date: 2025-06-04
-Maintainer: Diego J. Lizcano <dj.lizcano@gmail.com>
-Description: Provides a simple tool to extract frames (pictograms) from videos while 
+Description: Provides tools to extract frames (pictograms) from videos while 
     preserving and stamping original video metadata (recording date and time) 
     into the extracted images. Supports batch processing of folders and 
     customizable time zone offsets.
@@ -20,8 +18,8 @@ Imports:
     exiftoolr,
     lubridate,
     methods
-URL: 
-    https://github.com/dlizcano/mammalcol,
-    https://dlizcano.github.io/mammalcol/
-BugReports: https://github.com/dlizcano/mammalcol/issues
-VignetteBuilder: knitr
+URL: https://github.com/dlizcano/photoextractor
+BugReports: https://github.com/dlizcano/photoextractor/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

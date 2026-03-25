@@ -4,14 +4,14 @@
 \alias{extract}
 \title{Extract Frames from Video or Folder}
 \usage{
-extract(extractor, ...)
+extract(extractor, verbose = TRUE, ...)
 }
 \arguments{
 \item{extractor}{An object of class \code{VideoFrameExtractor} or \code{FolderExtractor}.}
 
-\item{...}{Additional arguments.}
-
 \item{verbose}{logical. If TRUE, progress messages are printed.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 The extractor object (invisibly).

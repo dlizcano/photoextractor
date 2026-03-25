@@ -7,7 +7,7 @@
 NULL
 
 # =============================================================================
-# ── INTERNAL HELPERS ─────────────────────────────────────────────────────────
+# -- INTERNAL HELPERS ---------------------------------------------------------
 # =============================================================================
 
 #' @noRd
@@ -56,7 +56,7 @@ NULL
         raw_str  <- as.character(val[1])
         tz_found <- .parse_exif_tz_offset(raw_str)
         
-        # Normalise date separators  "YYYY:MM:DD" → "YYYY-MM-DD"
+        # Normalise date separators  "YYYY:MM:DD" -> "YYYY-MM-DD"
         ts_clean <- gsub("^(\\d{4}):(\\d{2}):(\\d{2})", "\\1-\\2-\\3", raw_str)
         # Strip trailing tz token so lubridate parses cleanly
         ts_clean <- gsub("[+-]\\d{2}:\\d{2}$", "", trimws(ts_clean))
@@ -69,7 +69,7 @@ NULL
         
         if (!is.na(parsed)) {
           if (!is.na(tz_found)) {
-            # EXIF string has a real UTC offset → convert properly to UTC
+            # EXIF string has a real UTC offset -> convert properly to UTC
             parsed_local <- lubridate::force_tz(parsed,
                                                 tzone = sprintf("Etc/GMT%+d", -as.integer(tz_found)))
             recording_start <- lubridate::with_tz(parsed_local, "UTC")
@@ -101,7 +101,7 @@ NULL
 .stamp_image <- function(image_path, dt_posix) {
   dt_str <- .to_exif_dt(dt_posix)
   
-  # Pass 1 – embedded EXIF (needs -overwrite_original to avoid backup files)
+  # Pass 1 - embedded EXIF (needs -overwrite_original to avoid backup files)
   exiftoolr::exif_call(
     args = c(
       "-overwrite_original",
@@ -111,7 +111,7 @@ NULL
     path = image_path
   )
   
-  # Pass 2 – filesystem timestamps (OS metadata, no -overwrite_original needed)
+  # Pass 2 - filesystem timestamps (OS metadata, no -overwrite_original needed)
   # Note: FileCreateDate is only writable on Windows and macOS, not Linux.
   exiftoolr::exif_call(
     args = c(
@@ -127,7 +127,7 @@ NULL
 .rename_frames <- function(frame_files, video_path) {
   video_stem <- tools::file_path_sans_ext(basename(video_path))
   n          <- length(frame_files)
-  pad_width  <- nchar(as.character(n))   # auto width: 10 frames→2, 999→3 …
+  pad_width  <- nchar(as.character(n))   # auto width: 10 frames->2, 999->3 ...
   ext        <- tools::file_ext(frame_files[1])
   
   new_paths <- file.path(
@@ -140,11 +140,17 @@ NULL
 }
 
 # =============================================================================
-# ── S7 CLASS: VideoFrameExtractor ────────────────────────────────────────────
+# -- S7 CLASS: VideoFrameExtractor --------------------------------------------
 # Single-video extractor
 # =============================================================================
 
 #' S7 Class for Single Video Frame Extraction
+#' 
+#' @param video_path character. Full path to source video.
+#' @param output_dir character. Directory for extracted frames.
+#' @param fps numeric. Frames per second (default 1).
+#' @param format character. "jpg" or "png".
+#' @param camera_tz_offset numeric. Camera UTC offset in hours (e.g. -5).
 #' 
 #' @slot video_path character. Full path to source video.
 #' @slot output_dir character. Directory for extracted frames.
@@ -181,16 +187,16 @@ VideoFrameExtractor <- S7::new_class(
     ext_ok <- tolower(tools::file_ext(video_path)) %in% c("avi", "mp4", "mov",
                                                           "mkv", "m4v")
     if (!ext_ok)
-      stop("❌ Unsupported video format. Supported: AVI, MP4, MOV, MKV, M4V")
+      stop("Unsupported video format. Supported: AVI, MP4, MOV, MKV, M4V")
     
     if (!format %in% c("jpg", "png"))
-      stop("`⚠️ format` must be 'jpg' or 'png'.")
+      stop("`format` must be 'jpg' or 'png'.")
     
     if (fps <= 0.5)
-      stop("`❌ fps` must be > 0.5.")
+      stop("`fps` must be > 0.5.")
     
     if (!is.numeric(camera_tz_offset) || abs(camera_tz_offset) > 14)
-      stop("`⚠️ camera_tz_offset` must be a number between -14 and +14.")
+      stop("`camera_tz_offset` must be a number between -14 and +14.")
     
     if (!dir.exists(output_dir)) {
       dir.create(output_dir, recursive = TRUE)
@@ -213,7 +219,7 @@ VideoFrameExtractor <- S7::new_class(
 )
 
 # =============================================================================
-# ── GENERIC: extract()
+# -- GENERIC: extract()
 # =============================================================================
 
 #' Extract Frames from Video or Folder
@@ -226,16 +232,18 @@ VideoFrameExtractor <- S7::new_class(
 #' 
 #' @return The extractor object (invisibly).
 #' @export
-extract <- S7::new_generic("extract", "extractor")
+extract <- S7::new_generic("extract", "extractor", function(extractor, verbose = TRUE, ...) {
+  S7::S7_dispatch()
+})
 
 #' @method extract VideoFrameExtractor
 #' @export
-S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) {
+S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE, ...) {
   
   vname <- basename(extractor@video_path)
   
   if (verbose) {
-    message("\n── Starting VideoFrameExtractor ───────────────────────")
+    message("\n-- Starting VideoFrameExtractor -----------------------")
     message("  Video      : ", vname)
     message("  Output dir : ", extractor@output_dir)
     message("  FPS        : ", extractor@fps)
@@ -243,8 +251,8 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) 
     message("  Camera tz  : UTC", sprintf("%+.1f", extractor@camera_tz_offset))
     message("  Start (UTC): ", format(extractor@start_time,
                                       "%Y-%m-%d %H:%M:%S %Z"))
-    message("────────────────────────────────────────────────────────")
-    message("Step 1/3 – Extracting frames 📸")
+    message("--------------------------------------------------------")
+    message("Step 1/3 - Extracting frames")
   }
   
   frame_files <- tryCatch(
@@ -255,21 +263,21 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) 
       fps     = extractor@fps
     ),
     error = function(e) {
-      stop(sprintf("❌ av_video_images() failed for '%s': %s",
+      stop(sprintf("av_video_images() failed for '%s': %s",
                    vname, conditionMessage(e)))
     }
   )
   
   if (length(frame_files) == 0)
-    stop(sprintf("❌ No frames extracted from '%s'. File may be corrupt.", vname))
+    stop(sprintf("No frames extracted from '%s'. File may be corrupt.", vname))
   
   if (verbose)
     message(sprintf("  Extracted %d raw frame(s).", length(frame_files)))
   
-  if (verbose) message("Step 2/3 – Renaming frames to include video name …")
+  if (verbose) message("Step 2/3 - Renaming frames to include video name ...")
   frame_files <- .rename_frames(frame_files, extractor@video_path)
   
-  if (verbose) message("Step 3/3 – Writing timestamps via exiftoolr …")
+  if (verbose) message("Step 3/3 - Writing timestamps via exiftoolr ...")
   
   secs_per_frame <- 1 / extractor@fps
   
@@ -279,12 +287,12 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) 
     tryCatch(
       .stamp_image(frame_files[i], frame_time),
       error = function(e) warning(sprintf(
-        "❌ Could not stamp '%s': %s", basename(frame_files[i]),
+        "Could not stamp '%s': %s", basename(frame_files[i]),
         conditionMessage(e)))
     )
     
     if (verbose) {
-      message(sprintf("  [%d/%d]  %-20s  ➡️  %s",
+      message(sprintf("  [%d/%d]  %-20s  ->  %s",
                       i, length(frame_files),
                       basename(frame_files[i]),
                       .to_exif_dt(frame_time)))
@@ -293,13 +301,13 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) 
   
   extractor@frame_paths <- frame_files
   if (verbose)
-    message(sprintf("✅ %d frame(s) saved to: %s\n",
+    message(sprintf("%d frame(s) saved to: %s\n",
                     length(frame_files), extractor@output_dir))
   invisible(extractor)
 }
 
 # =============================================================================
-# ── GENERIC: verify_timestamps()
+# -- GENERIC: verify_timestamps()
 # =============================================================================
 
 #' Verify Timestamps of Extracted Frames
@@ -307,6 +315,7 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE) 
 #' Reads back the metadata from the extracted frames to verify it was correctly stamped.
 #' 
 #' @param extractor An object of class `VideoFrameExtractor`.
+#' @param ... Additional arguments.
 #' 
 #' @return A data frame with the metadata (invisibly).
 #' @export
@@ -314,9 +323,9 @@ verify_timestamps <- S7::new_generic("verify_timestamps", "extractor")
 
 #' @method verify_timestamps VideoFrameExtractor
 #' @export
-S7::method(verify_timestamps, VideoFrameExtractor) <- function(extractor) {
+S7::method(verify_timestamps, VideoFrameExtractor) <- function(extractor, ...) {
   if (length(extractor@frame_paths) == 0) {
-    message("No frames extracted yet – run extract() first.")
+    message("No frames extracted yet - run extract() first.")
     return(invisible(NULL))
   }
   meta <- exiftoolr::exif_read(
@@ -324,20 +333,20 @@ S7::method(verify_timestamps, VideoFrameExtractor) <- function(extractor) {
     tags = c("FileName", "DateTimeOriginal", "CreateDate",
              "FileModifyDate", "FileAccessDate", "FileCreateDate")
   )
-  cat("\n── Verified timestamps ─────────────────────────────────\n")
+  cat("\n-- Verified timestamps ---------------------------------\n")
   print(meta[, c("FileName", "DateTimeOriginal", "CreateDate",
                  "FileModifyDate", "FileAccessDate", "FileCreateDate")])
-  cat("────────────────────────────────────────────────────────\n")
+  cat("--------------------------------------------------------\n")
   invisible(meta)
 }
 
 # =============================================================================
-# ── S7 print method for VideoFrameExtractor
+# -- S7 print method for VideoFrameExtractor
 # =============================================================================
 #' @method print VideoFrameExtractor
 #' @export
 S7::method(print, VideoFrameExtractor) <- function(x, ...) {
-  cat("── VideoFrameExtractor ─────────────────────────────────\n")
+  cat("-- VideoFrameExtractor ---------------------------------\n")
   cat("  video_path       :", x@video_path, "\n")
   cat("  output_dir       :", x@output_dir, "\n")
   cat("  fps              :", x@fps, "\n")
@@ -347,16 +356,22 @@ S7::method(print, VideoFrameExtractor) <- function(x, ...) {
   cat("  frames           :", length(x@frame_paths),
       if (length(x@frame_paths) > 0) "(extracted)" else "(not yet extracted)",
       "\n")
-  cat("────────────────────────────────────────────────────────\n")
+  cat("--------------------------------------------------------\n")
   invisible(x)
 }
 
 # =============================================================================
-# ── S7 CLASS: FolderExtractor ────────────────────────────────────────────────
+# -- S7 CLASS: FolderExtractor ------------------------------------------------
 # Batch processor
 # =============================================================================
 
 #' S7 Class for Batch Folder Video Frame Extraction
+#' 
+#' @param folder_path character. Folder containing videos.
+#' @param output_dir character. Root output folder.
+#' @param fps numeric.
+#' @param format character.
+#' @param camera_tz_offset numeric.
 #' 
 #' @slot folder_path character. Folder containing videos.
 #' @slot output_dir character. Root output folder.
@@ -416,12 +431,12 @@ FolderExtractor <- S7::new_class(
 
 #' @method extract FolderExtractor
 #' @export
-S7::method(extract, FolderExtractor) <- function(extractor, verbose = TRUE) {
+S7::method(extract, FolderExtractor) <- function(extractor, verbose = TRUE, ...) {
   
   n      <- length(extractor@video_files)
   results <- vector("list", n)
   
-  if (verbose) message(sprintf("\n══ FolderExtractor: processing %d video(s) ══", n))
+  if (verbose) message(sprintf("\n== FolderExtractor: processing %d video(s) ==", n))
   
   for (i in seq_len(n)) {
     vpath <- extractor@video_files[i]
@@ -441,14 +456,14 @@ S7::method(extract, FolderExtractor) <- function(extractor, verbose = TRUE) {
       extract(ext_i, verbose = verbose)
     },
     error = function(e) {
-      if (verbose) message(sprintf("  !! SKIPPED – error: %s", conditionMessage(e)))
+      if (verbose) message(sprintf("  !! SKIPPED - error: %s", conditionMessage(e)))
       NULL
     })
   }
   
   if (verbose) {
     ok      <- sum(!vapply(results, is.null, logical(1)))
-    message(sprintf("\n══ Batch complete: %d/%d video(s) processed ══\n", ok, n))
+    message(sprintf("\n== Batch complete: %d/%d video(s) processed ==\n", ok, n))
   }
   
   extractor@results <- results
@@ -459,7 +474,7 @@ S7::method(extract, FolderExtractor) <- function(extractor, verbose = TRUE) {
 #' @export
 S7::method(print, FolderExtractor) <- function(x, ...) {
   n_ok <- sum(!vapply(x@results, is.null, logical(1)))
-  cat("── FolderExtractor ─────────────────────────────────────\n")
+  cat("-- FolderExtractor -------------------------------------\n")
   cat("  folder_path      :", x@folder_path, "\n")
   cat("  output_dir       :", x@output_dir, "\n")
   cat("  fps              :", x@fps, "\n")
@@ -467,6 +482,6 @@ S7::method(print, FolderExtractor) <- function(x, ...) {
   cat("  camera_tz_offset :", sprintf("UTC%+.1f", x@camera_tz_offset), "\n")
   cat("  videos found     :", length(x@video_files), "\n")
   cat("  videos processed :", n_ok, "\n")
-  cat("────────────────────────────────────────────────────────\n")
+  cat("--------------------------------------------------------\n")
   invisible(x)
 }

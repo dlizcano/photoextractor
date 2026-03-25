@@ -1,14 +1,31 @@
-# photoextractor
+
+
+# photoextractor <img src="man/figures/photoextractor_logo_small.png" align="right" alt="photoextractor" />
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/dlizcano/photoextractor/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dlizcano/photoextractor/actions/workflows/R-CMD-check.yaml)
+[![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/photoextractor?color=blue)](https://cran.r-project.org/package=photoextractor)
+[![CRAN status](https://www.r-pkg.org/badges/version/photoextractor)](https://CRAN.R-project.org/package=photoextractor)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![size](https://img.shields.io/github/languages/code-size/dlizcano/photoextractor.svg)](https://github.com/dlizcano/photoextractor)
+<!-- badges: end -->
+
 
 The `photoextractor` R package allows you to extract pictograms (frames) from videos while preserving and stamping the original metadata from the video into the extracted images.
 
 ## Installation
 
-You can install the development version of `photoextractor` from this directory:
+You can install `photoextractor` from CRAN with:
 
 ```r
-devtools::install()
+# install.packages("photoextractor")
 ```
+You can install the development version of `photoextractor` from GitHub with:
+
+```r
+devtools::install_github("dlizcano/photoextractor")
+```
+
 
 ### External Dependencies
 
@@ -20,7 +37,7 @@ exiftoolr::install_exiftool()
 
 ## Usage
 
-### Single Video Extraction
+### 🎬 Single Video Extraction
 
 To extract frames from a single video:
 
@@ -43,7 +60,7 @@ ext <- extract(ext, verbose = TRUE)
 verify_timestamps(ext)
 ```
 
-### Batch Folder Processing
+### 📁 Batch Folder Processing
 
 To process all videos in a folder:
 
@@ -61,6 +78,9 @@ folder_ext <- FolderExtractor(
 
 # Run batch extraction
 folder_ext <- extract(folder_ext, verbose = TRUE)
+
+# Verify that timestamps were stamped correctly
+verify_timestamps(folder_ext)
 ```
 
 ## Features
@@ -70,3 +90,6 @@ folder_ext <- extract(folder_ext, verbose = TRUE)
 - **Timezone Correction**: Handles UTC offsets and camera clock corrections.
 - **Organized Output**: Automatically renames frames to include the source video name and zero-padded indices.
 - **Modern OOP**: Built using the new **S7** object system for R.
+
+
+

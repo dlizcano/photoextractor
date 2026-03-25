@@ -12,6 +12,17 @@ VideoFrameExtractor(
   camera_tz_offset = -5
 )
 }
+\arguments{
+\item{video_path}{character. Full path to source video.}
+
+\item{output_dir}{character. Directory for extracted frames.}
+
+\item{fps}{numeric. Frames per second (default 1).}
+
+\item{format}{character. "jpg" or "png".}
+
+\item{camera_tz_offset}{numeric. Camera UTC offset in hours (e.g. -5).}
+}
 \description{
 S7 Class for Single Video Frame Extraction
 }

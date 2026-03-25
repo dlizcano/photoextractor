@@ -12,6 +12,17 @@ FolderExtractor(
   camera_tz_offset = -5
 )
 }
+\arguments{
+\item{folder_path}{character. Folder containing videos.}
+
+\item{output_dir}{character. Root output folder.}
+
+\item{fps}{numeric.}
+
+\item{format}{character.}
+
+\item{camera_tz_offset}{numeric.}
+}
 \description{
 S7 Class for Batch Folder Video Frame Extraction
 }

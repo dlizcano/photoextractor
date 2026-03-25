@@ -8,6 +8,8 @@ verify_timestamps(extractor, ...)
 }
 \arguments{
 \item{extractor}{An object of class \code{VideoFrameExtractor}.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 A data frame with the metadata (invisibly).
