@@ -7,3 +7,6 @@
 ^data-raw$
 ^photoextractor\.Rcheck$
 ^tool-outputs$
+^cran-comments\.md$
+^README.Rmd
+^LICENSE\.md$

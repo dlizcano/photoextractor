@@ -29,7 +29,7 @@ devtools::install_github("dlizcano/photoextractor")
 
 ### External Dependencies
 
-This package relies on **ExifTool**. After installing the package, you must ensure ExifTool is available. The `exiftoolr` package can download it for you:
+This package relies on **ExifTool**. After installing the package, you must ensure ExifTool is available. The [`exiftoolr`](https://joshobrien.github.io/exiftoolr/) package can download it for you:
 
 ```r
 exiftoolr::install_exiftool()
@@ -39,17 +39,17 @@ exiftoolr::install_exiftool()
 
 ### 🎬 Single Video Extraction
 
-To extract frames from a single video:
+To extract frames from a single video (avi|mp4|mov|mkv|m4v):
 
 ```r
 library(photoextractor)
 
 # Create an extractor object
 ext <- VideoFrameExtractor(
-  video_path       = "path/to/your/video.mp4",
-  output_dir       = "path/to/output/frames",
+  video_path       = "path/to/your/video.mp4", 
+  output_dir       = "path/to/output/frames", 
   fps              = 1,            # 1 frame per second
-  format           = "jpg",        # "jpg" or "png"
+  format           = "jpg",        # photo format "jpg" or "png"
   camera_tz_offset = -5            # Timezone offset (e.g., -5 for Colombia)
 )
 
@@ -71,9 +71,9 @@ library(photoextractor)
 folder_ext <- FolderExtractor(
   folder_path      = "path/to/videos",
   output_dir       = "path/to/output",
-  fps              = 1,
-  format           = "jpg",
-  camera_tz_offset = -5
+  fps              = 1,           # 1 frame per second
+  format           = "jpg",       # photo format "jpg" or "png"
+  camera_tz_offset = -5           # Timezone offset (e.g., -5 for Colombia)
 )
 
 # Run batch extraction

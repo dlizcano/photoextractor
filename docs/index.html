@@ -64,7 +64,7 @@
 <div class="section level3">
 <h3 id="external-dependencies">External Dependencies<a class="anchor" aria-label="anchor" href="#external-dependencies"></a>
 </h3>
-<p>This package relies on <strong>ExifTool</strong>. After installing the package, you must ensure ExifTool is available. The <code>exiftoolr</code> package can download it for you:</p>
+<p>This package relies on <strong>ExifTool</strong>. After installing the package, you must ensure ExifTool is available. The <a href="https://joshobrien.github.io/exiftoolr/" class="external-link"><code>exiftoolr</code></a> package can download it for you:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">exiftoolr</span><span class="fu">::</span><span class="fu"><a href="https://joshobrien.github.io/exiftoolr/reference/install_exiftool.html" class="external-link">install_exiftool</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -75,16 +75,16 @@
 <div class="section level3">
 <h3 id="clapper-single-video-extraction">🎬 Single Video Extraction<a class="anchor" aria-label="anchor" href="#clapper-single-video-extraction"></a>
 </h3>
-<p>To extract frames from a single video:</p>
+<p>To extract frames from a single video (avi|mp4|mov|mkv|m4v):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dlizcano/photoextractor" class="external-link">photoextractor</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create an extractor object</span></span>
 <span><span class="va">ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/VideoFrameExtractor.html">VideoFrameExtractor</a></span><span class="op">(</span></span>
-<span>  video_path       <span class="op">=</span> <span class="st">"path/to/your/video.mp4"</span>,</span>
-<span>  output_dir       <span class="op">=</span> <span class="st">"path/to/output/frames"</span>,</span>
+<span>  video_path       <span class="op">=</span> <span class="st">"path/to/your/video.mp4"</span>, </span>
+<span>  output_dir       <span class="op">=</span> <span class="st">"path/to/output/frames"</span>, </span>
 <span>  fps              <span class="op">=</span> <span class="fl">1</span>,            <span class="co"># 1 frame per second</span></span>
-<span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,        <span class="co"># "jpg" or "png"</span></span>
+<span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,        <span class="co"># photo format "jpg" or "png"</span></span>
 <span>  camera_tz_offset <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>            <span class="co"># Timezone offset (e.g., -5 for Colombia)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -105,9 +105,9 @@
 <span><span class="va">folder_ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/FolderExtractor.html">FolderExtractor</a></span><span class="op">(</span></span>
 <span>  folder_path      <span class="op">=</span> <span class="st">"path/to/videos"</span>,</span>
 <span>  output_dir       <span class="op">=</span> <span class="st">"path/to/output"</span>,</span>
-<span>  fps              <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,</span>
-<span>  camera_tz_offset <span class="op">=</span> <span class="op">-</span><span class="fl">5</span></span>
+<span>  fps              <span class="op">=</span> <span class="fl">1</span>,           <span class="co"># 1 frame per second</span></span>
+<span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,       <span class="co"># photo format "jpg" or "png"</span></span>
+<span>  camera_tz_offset <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>           <span class="co"># Timezone offset (e.g., -5 for Colombia)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run batch extraction</span></span>
