@@ -74,7 +74,7 @@ folder_ext <- FolderExtractor(
 folder_ext <- extract(folder_ext, verbose = TRUE)
 
 # Verify that timestamps were stamped correctly
-verify_timestamps(folder_ext)
+print(folder_ext@results)
 ```
 
 ## Features
