@@ -23,6 +23,11 @@ FolderExtractor(
 
 \item{camera_tz_offset}{numeric.}
 }
+\value{
+An object of class \code{FolderExtractor}. This object stores settings for
+batch processing multiple video files within a directory. It identifies
+all compatible video files and prepares for extraction.
+}
 \description{
 S7 Class for Batch Folder Video Frame Extraction
 }
@@ -44,3 +49,15 @@ S7 Class for Batch Folder Video Frame Extraction
 \item{\code{results}}{list. List of VideoFrameExtractor objects.}
 }}
 
+\examples{
+video_dir <- system.file("extdata", package = "photoextractor")
+if (video_dir != "") {
+  extractor <- FolderExtractor(
+    folder_path = video_dir,
+    output_dir = tempdir(),
+    fps = 1,
+    camera_tz_offset = -5
+  )
+  print(extractor)
+}
+}

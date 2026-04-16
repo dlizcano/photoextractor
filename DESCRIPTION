@@ -1,10 +1,10 @@
 Package: photoextractor
 Title: Extract Pictograms from Videos with Metadata Preservation
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Diego J.", "Lizcano", , "dj.lizcano@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9648-0576"))
-Date: 2026-03-24
+Date: 2026-04-15
 Maintainer: Diego J. Lizcano <dj.lizcano@gmail.com>
 Description: Provides tools to extract frames (pictograms) from videos while 
     preserving and stamping original video metadata (recording date and time) 
@@ -20,7 +20,9 @@ Imports:
     exiftoolr,
     lubridate,
     methods
-URL: https://github.com/dlizcano/photoextractor
+URL: 
+    https://github.com/dlizcano/photoextractor,
+    https://dlizcano.github.io/photoextractor/
 BugReports: https://github.com/dlizcano/photoextractor/issues
 Suggests: 
     testthat (>= 3.0.0)

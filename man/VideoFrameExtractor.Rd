@@ -23,6 +23,12 @@ VideoFrameExtractor(
 
 \item{camera_tz_offset}{numeric. Camera UTC offset in hours (e.g. -5).}
 }
+\value{
+An object of class \code{VideoFrameExtractor}. This object stores information
+about a single video file, its output directory, frame rate, and calculated
+start time based on metadata. It is used to perform frame extraction and
+metadata stamping.
+}
 \description{
 S7 Class for Single Video Frame Extraction
 }

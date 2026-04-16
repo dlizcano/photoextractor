@@ -14,7 +14,9 @@ extract(extractor, verbose = TRUE, ...)
 \item{...}{Additional arguments.}
 }
 \value{
-The extractor object (invisibly).
+The original extractor object (either \code{VideoFrameExtractor} or
+\code{FolderExtractor}) returned invisibly. The object is updated with the
+paths to the extracted frames or the results of the batch processing.
 }
 \description{
 Generic function to extract frames from a video file or all videos in a folder.

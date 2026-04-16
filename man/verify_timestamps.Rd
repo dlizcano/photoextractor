@@ -12,7 +12,9 @@ verify_timestamps(extractor, ...)
 \item{...}{Additional arguments.}
 }
 \value{
-A data frame with the metadata (invisibly).
+A \code{data.frame} (returned invisibly) containing metadata extracted
+from the frames, such as original and modified timestamps. If no frames
+have been extracted, returns \code{NULL} invisibly with a message.
 }
 \description{
 Reads back the metadata from the extracted frames to verify it was correctly stamped.

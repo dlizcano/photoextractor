@@ -3,33 +3,32 @@
 # photoextractor <img src="man/figures/photoextractor_logo_small.png" align="right" alt="photoextractor" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/dlizcano/photoextractor/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dlizcano/photoextractor/actions/workflows/R-CMD-check.yaml)
 [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/photoextractor?color=blue)](https://cran.r-project.org/package=photoextractor)
-[![CRAN status](https://www.r-pkg.org/badges/version/photoextractor)](https://CRAN.R-project.org/package=photoextractor)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![size](https://img.shields.io/github/languages/code-size/dlizcano/photoextractor.svg)](https://github.com/dlizcano/photoextractor)
+[![](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg)](https://github.com/dlizcano/photoextractor)
 <!-- badges: end -->
 
 
-The `photoextractor` R package allows you to extract pictograms (frames) from videos while preserving and stamping the original metadata from the video into the extracted images.
+The `photoextractor` R package allows you to extract single frames (pictures) from videos while preserving and stamping the original metadata from the video into the extracted images.
+The package can be useful to convert camera trap videos to image sequences preserving the original date and time. 
 
-## Installation
+🎞️ + ✂️ = 🖼️
 
-You can install `photoextractor` from CRAN with:
+## ⏬ Installation
 
-```r
-# install.packages("photoextractor")
-```
-You can install the development version of `photoextractor` from GitHub with:
+`photoextractor` is not in CRAN yet 🛑. However You can install the development version from GitHub with:
 
 ```r
+# install.packages("devtools")
 devtools::install_github("dlizcano/photoextractor")
 ```
 
 
 ### External Dependencies
 
-This package relies on **ExifTool**. After installing the package, you must ensure ExifTool is available. The [`exiftoolr`](https://joshobrien.github.io/exiftoolr/) package can download it for you:
+This package relies on 🔨 [**ExifTool**](https://exiftool.org/) 🔨. After installing the package, you must ensure **ExifTool** is installed and 
+available in your computer. The [`exiftoolr`](https://joshobrien.github.io/exiftoolr/) package can download and install the **ExifTool** for you, just run:
 
 ```r
 exiftoolr::install_exiftool()
@@ -39,7 +38,9 @@ exiftoolr::install_exiftool()
 
 ### 🎬 Single Video Extraction
 
-To extract frames from a single video (avi|mp4|mov|mkv|m4v):
+To extract frames from a single video. The video can be any of the following formats: 
+avi, mp4, mov, mkv, or m4v. 
+
 
 ```r
 library(photoextractor)
@@ -62,7 +63,8 @@ verify_timestamps(ext)
 
 ### 📁 Batch Folder Processing
 
-To process all videos in a folder:
+To process all videos in a folder. The videos can be any of the following formats: 
+avi, mp4, mov, mkv, or m4v
 
 ```r
 library(photoextractor)
