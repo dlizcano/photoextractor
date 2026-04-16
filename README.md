@@ -96,16 +96,22 @@ video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
 
 frames <- VideoFrameExtractor(
   video_path       = video_file, 
-  output_dir       = paste(getwd(), "/frames", sep=""),
+  output_dir       = paste(getwd(), "/frames", sep=""),  # change if you want
   fps              = 1,            # 1 frame per second
   format           = "jpg",        # photo format "jpg" or "png"
   camera_tz_offset = -5            # Timezone offset (e.g., -5 for Colombia)
 )
 
-frames
-```
-Check you have pictures in the folder `frames` in your working directory.
+# Run the extraction
+ext <- extract(frames , verbose = TRUE)
 
+# Verify that timestamps were stamped correctly
+verify_timestamps(ext)
+
+```
+Check you have five pictures in the folder `frames` in your working directory.
+
+![sample frames](man/figures/sample_frames.jpg)
 
 ## Features
 

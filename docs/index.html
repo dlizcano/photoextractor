@@ -127,14 +127,21 @@
 <span></span>
 <span><span class="va">frames</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/VideoFrameExtractor.html">VideoFrameExtractor</a></span><span class="op">(</span></span>
 <span>  video_path       <span class="op">=</span> <span class="va">video_file</span>, </span>
-<span>  output_dir       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/frames"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,</span>
+<span>  output_dir       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/frames"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,  <span class="co"># change if you want</span></span>
 <span>  fps              <span class="op">=</span> <span class="fl">1</span>,            <span class="co"># 1 frame per second</span></span>
 <span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,        <span class="co"># photo format "jpg" or "png"</span></span>
 <span>  camera_tz_offset <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>            <span class="co"># Timezone offset (e.g., -5 for Colombia)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">frames</span></span></code></pre></div>
-<p>Check you have pictures in the folder <code>frames</code> in your working directory.</p>
+<span><span class="co"># Run the extraction</span></span>
+<span><span class="va">ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extract.html">extract</a></span><span class="op">(</span><span class="va">frames</span> , verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Verify that timestamps were stamped correctly</span></span>
+<span><span class="fu"><a href="reference/verify_timestamps.html">verify_timestamps</a></span><span class="op">(</span><span class="va">ext</span><span class="op">)</span></span></code></pre></div>
+<p>Check you have five pictures in the folder <code>frames</code> in your working directory.</p>
+<div class="float">
+<img src="reference/figures/sample_frames.jpg" alt="sample frames"><div class="figcaption">sample frames</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
