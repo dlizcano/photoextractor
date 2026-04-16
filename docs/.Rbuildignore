@@ -1,0 +1,12 @@
+^photoextractor\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^revdep$
+^data-raw$
+^photoextractor\.Rcheck$
+^tool-outputs$
+^cran-comments\.md$
+^README.Rmd
+^LICENSE\.md$
