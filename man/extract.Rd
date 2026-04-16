@@ -21,3 +21,11 @@ paths to the extracted frames or the results of the batch processing.
 \description{
 Generic function to extract frames from a video file or all videos in a folder.
 }
+\examples{
+video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+# Check if external tools are available
+if (video_file != "" && av::av_media_info(video_file)$duration > 0) {
+  extractor <- VideoFrameExtractor(video_file, output_dir = tempdir())
+  # extract(extractor) # This requires exiftool to be installed
+}
+}

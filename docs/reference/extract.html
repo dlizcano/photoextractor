@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">photoextractor</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,22 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The extractor object (invisibly).</p>
+    <p>The original extractor object (either <code>VideoFrameExtractor</code> or
+<code>FolderExtractor</code>) returned invisibly. The object is updated with the
+paths to the extracted frames or the results of the batch processing.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">video_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample.mp4"</span>, package <span class="op">=</span> <span class="st">"photoextractor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Check if external tools are available</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="va">video_file</span> <span class="op">!=</span> <span class="st">""</span> <span class="op">&amp;&amp;</span> <span class="fu">av</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/av//reference/info.html" class="external-link">av_media_info</a></span><span class="op">(</span><span class="va">video_file</span><span class="op">)</span><span class="op">$</span><span class="va">duration</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">extractor</span> <span class="op">&lt;-</span> <span class="fu"><a href="VideoFrameExtractor.html">VideoFrameExtractor</a></span><span class="op">(</span><span class="va">video_file</span>, output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># extract(extractor) # This requires exiftool to be installed</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using ExifTool version 13.53</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -72,7 +85,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

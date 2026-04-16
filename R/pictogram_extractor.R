@@ -160,11 +160,22 @@ NULL
 #' @slot start_time POSIXct. Recording start (UTC).
 #' @slot frame_paths character. Paths of saved frames (after extract).
 #'
-#' @return An object of class `VideoFrameExtractor`. This object stores information
-#'   about a single video file, its output directory, frame rate, and calculated
-#'   start time based on metadata. It is used to perform frame extraction and
+#' @return An object of class `VideoFrameExtractor`. This object stores information 
+#'   about a single video file, its output directory, frame rate, and calculated 
+#'   start time based on metadata. It is used to perform frame extraction and 
 #'   metadata stamping.
-#'
+#' 
+#' @examples
+#' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+#' if (video_file != "") {
+#'   extractor <- VideoFrameExtractor(
+#'     video_path = video_file,
+#'     output_dir = tempdir(),
+#'     fps = 1,
+#'     camera_tz_offset = -5
+#'   )
+#'   print(extractor)
+#' }
 #' @export
 VideoFrameExtractor <- S7::new_class(
   name = "VideoFrameExtractor",
@@ -235,12 +246,19 @@ VideoFrameExtractor <- S7::new_class(
 #' @param verbose logical. If TRUE, progress messages are printed.
 #' @param ... Additional arguments.
 #'
-#' @return The original extractor object (either `VideoFrameExtractor` or
-#'   `FolderExtractor`) returned invisibly. The object is updated with the
+#' @return The original extractor object (either `VideoFrameExtractor` or 
+#'   `FolderExtractor`) returned invisibly. The object is updated with the 
 #'   paths to the extracted frames or the results of the batch processing.
+#' 
+#' @examples
+#' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+#' # Check if external tools are available
+#' if (video_file != "" && av::av_media_info(video_file)$duration > 0) {
+#'   extractor <- VideoFrameExtractor(video_file, output_dir = tempdir())
+#'   # extract(extractor) # This requires exiftool to be installed
+#' }
 #' @export
-extract <- S7::new_generic("extract", "extractor", function(extractor, verbose = TRUE, ...) {
-  S7::S7_dispatch()
+extract <- S7::new_generic("extract", "extractor", function(extractor, verbose = TRUE, ...) {  S7::S7_dispatch()
 })
 
 #' @method extract VideoFrameExtractor
@@ -324,12 +342,18 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE, 
 #' @param extractor An object of class `VideoFrameExtractor`.
 #' @param ... Additional arguments.
 #'
-#' @return A `data.frame` (returned invisibly) containing metadata extracted
-#'   from the frames, such as original and modified timestamps. If no frames
+#' @return A `data.frame` (returned invisibly) containing metadata extracted 
+#'   from the frames, such as original and modified timestamps. If no frames 
 #'   have been extracted, returns `NULL` invisibly with a message.
+#' 
+#' @examples
+#' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+#' if (video_file != "") {
+#'   extractor <- VideoFrameExtractor(video_file, output_dir = tempdir())
+#'   # verify_timestamps(extractor) # Only works after extract()
+#' }
 #' @export
 verify_timestamps <- S7::new_generic("verify_timestamps", "extractor")
-
 #' @method verify_timestamps VideoFrameExtractor
 #' @export
 S7::method(verify_timestamps, VideoFrameExtractor) <- function(extractor, ...) {

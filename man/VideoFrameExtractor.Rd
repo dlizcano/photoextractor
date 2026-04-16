@@ -50,3 +50,15 @@ S7 Class for Single Video Frame Extraction
 \item{\code{frame_paths}}{character. Paths of saved frames (after extract).}
 }}
 
+\examples{
+video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+if (video_file != "") {
+  extractor <- VideoFrameExtractor(
+    video_path = video_file,
+    output_dir = tempdir(),
+    fps = 1,
+    camera_tz_offset = -5
+  )
+  print(extractor)
+}
+}

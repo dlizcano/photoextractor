@@ -85,6 +85,28 @@ folder_ext <- extract(folder_ext, verbose = TRUE)
 print(folder_ext@results)
 ```
 
+## Example
+
+
+```r
+library(photoextractor)
+
+# Use a sample video
+video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+
+frames <- VideoFrameExtractor(
+  video_path       = video_file, 
+  output_dir       = paste(getwd(), "/frames", sep=""),
+  fps              = 1,            # 1 frame per second
+  format           = "jpg",        # photo format "jpg" or "png"
+  camera_tz_offset = -5            # Timezone offset (e.g., -5 for Colombia)
+)
+
+frames
+```
+Check you have pictures in the folder `frames` in your working directory.
+
+
 ## Features
 
 - **Metadata Preservation**: Automatically reads video start time from EXIF/metadata.

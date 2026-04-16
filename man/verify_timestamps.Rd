@@ -19,3 +19,10 @@ have been extracted, returns \code{NULL} invisibly with a message.
 \description{
 Reads back the metadata from the extracted frames to verify it was correctly stamped.
 }
+\examples{
+video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
+if (video_file != "") {
+  extractor <- VideoFrameExtractor(video_file, output_dir = tempdir())
+  # verify_timestamps(extractor) # Only works after extract()
+}
+}
