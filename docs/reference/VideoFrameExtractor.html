@@ -80,6 +80,14 @@ start time based on metadata. It is used to perform frame extraction and
 metadata stamping.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function scan a video for its metadata specifically date and time of creation
+and then extract a number of frames per second, saving the frames as pictures in format
+JPG or PNG on a specified path. The extracted frames are saved with date and time on Metadata.
+The function would be useful in situations when you program camera traps to shoot videos,
+but you need pictures to upload to Wildlife Insights.</p>
+    </div>
+    <div class="section level2">
     <h2 id="slots">Slots<a class="anchor" aria-label="anchor" href="#slots"></a></h2>
 
 
@@ -126,12 +134,12 @@ metadata stamping.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">extractor</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;photoextractor::VideoFrameExtractor&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  @ video_path      : chr "C:\\Users\\usuario\\AppData\\Local\\Temp\\RtmpqE0o1s\\temp_libpath600437ee170d\\photoextractor\\extdata\\sample.mp4"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  @ output_dir      : chr "C:\\Users\\usuario\\AppData\\Local\\Temp\\RtmpcJDAKR"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ video_path      : chr "C:\\Users\\usuario\\AppData\\Local\\Temp\\Rtmpi6YQIA\\temp_libpath7eec9c095\\photoextractor\\extdata\\sample.mp4"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ output_dir      : chr "C:\\Users\\usuario\\AppData\\Local\\Temp\\RtmpmaoXWH"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  @ fps             : num 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  @ format          : chr "jpg"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  @ camera_tz_offset: num -5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  @ start_time      : POSIXct[1:1], format: "2026-04-15 22:49:26"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ start_time      : POSIXct[1:1], format: "2026-04-17 14:10:02"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  @ frame_paths     : chr(0) </span>
 </code></pre></div>
     </div>

@@ -119,6 +119,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
+<p>The package has a sample video.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dlizcano/photoextractor" class="external-link">photoextractor</a></span><span class="op">)</span></span>
 <span></span>
@@ -126,9 +127,9 @@
 <span><span class="va">video_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sample.mp4"</span>, package <span class="op">=</span> <span class="st">"photoextractor"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">frames</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/VideoFrameExtractor.html">VideoFrameExtractor</a></span><span class="op">(</span></span>
-<span>  video_path       <span class="op">=</span> <span class="va">video_file</span>, </span>
+<span>  video_path       <span class="op">=</span> <span class="va">video_file</span>,   <span class="co"># change if you want </span></span>
 <span>  output_dir       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/frames"</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,  <span class="co"># change if you want</span></span>
-<span>  fps              <span class="op">=</span> <span class="fl">1</span>,            <span class="co"># 1 frame per second</span></span>
+<span>  fps              <span class="op">=</span> <span class="fl">1</span>,            <span class="co"># 1 frame per second as default. Change if you want</span></span>
 <span>  format           <span class="op">=</span> <span class="st">"jpg"</span>,        <span class="co"># photo format "jpg" or "png"</span></span>
 <span>  camera_tz_offset <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>            <span class="co"># Timezone offset (e.g., -5 for Colombia)</span></span>
 <span><span class="op">)</span></span>
@@ -138,7 +139,7 @@
 <span></span>
 <span><span class="co"># Verify that timestamps were stamped correctly</span></span>
 <span><span class="fu"><a href="reference/verify_timestamps.html">verify_timestamps</a></span><span class="op">(</span><span class="va">ext</span><span class="op">)</span></span></code></pre></div>
-<p>Check you have five pictures in the folder <code>frames</code> in your working directory.</p>
+<p>If you used the default video, check you have five pictures in the folder <code>frames</code> in your working directory.</p>
 <div class="float">
 <img src="reference/figures/sample_frames.jpg" alt="sample frames"><div class="figcaption">sample frames</div>
 </div>

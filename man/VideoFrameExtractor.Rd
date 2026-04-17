@@ -32,6 +32,13 @@ metadata stamping.
 \description{
 S7 Class for Single Video Frame Extraction
 }
+\details{
+This function scan a video for its metadata specifically date and time of creation
+and then extract a number of frames per second, saving the frames as pictures in format
+JPG or PNG on a specified path. The extracted frames are saved with date and time on Metadata.
+The function would be useful in situations when you program camera traps to shoot videos,
+but you need pictures to upload to Wildlife Insights.
+}
 \section{Slots}{
 
 \describe{

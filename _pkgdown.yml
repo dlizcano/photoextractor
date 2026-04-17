@@ -2,3 +2,14 @@ url: https://dlizcano.github.io/photoextractor/
 template:
   bootstrap: 5
 
+reference:
+  - title: Core Extraction
+    contents:
+      - VideoFrameExtractor
+      - FolderExtractor
+      - extract
+  - title: Utilities and Verification
+    contents:
+      - verify_timestamps
+      - read_img_stamp_date_in_parallel
+

@@ -160,11 +160,18 @@ NULL
 #' @slot start_time POSIXct. Recording start (UTC).
 #' @slot frame_paths character. Paths of saved frames (after extract).
 #'
-#' @return An object of class `VideoFrameExtractor`. This object stores information 
-#'   about a single video file, its output directory, frame rate, and calculated 
-#'   start time based on metadata. It is used to perform frame extraction and 
+#' @return An object of class `VideoFrameExtractor`. This object stores information
+#'   about a single video file, its output directory, frame rate, and calculated
+#'   start time based on metadata. It is used to perform frame extraction and
 #'   metadata stamping.
-#' 
+#'
+#' @details
+#' This function scan a video for its metadata specifically date and time of creation
+#' and then extract a number of frames per second, saving the frames as pictures in format
+#' JPG or PNG on a specified path. The extracted frames are saved with date and time on Metadata.
+#' The function would be useful in situations when you program camera traps to shoot videos,
+#' but you need pictures to upload to Wildlife Insights.
+#'
 #' @examples
 #' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
 #' if (video_file != "") {
@@ -246,10 +253,10 @@ VideoFrameExtractor <- S7::new_class(
 #' @param verbose logical. If TRUE, progress messages are printed.
 #' @param ... Additional arguments.
 #'
-#' @return The original extractor object (either `VideoFrameExtractor` or 
-#'   `FolderExtractor`) returned invisibly. The object is updated with the 
+#' @return The original extractor object (either `VideoFrameExtractor` or
+#'   `FolderExtractor`) returned invisibly. The object is updated with the
 #'   paths to the extracted frames or the results of the batch processing.
-#' 
+#'
 #' @examples
 #' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
 #' # Check if external tools are available
@@ -342,10 +349,10 @@ S7::method(extract, VideoFrameExtractor) <- function(extractor, verbose = TRUE, 
 #' @param extractor An object of class `VideoFrameExtractor`.
 #' @param ... Additional arguments.
 #'
-#' @return A `data.frame` (returned invisibly) containing metadata extracted 
-#'   from the frames, such as original and modified timestamps. If no frames 
+#' @return A `data.frame` (returned invisibly) containing metadata extracted
+#'   from the frames, such as original and modified timestamps. If no frames
 #'   have been extracted, returns `NULL` invisibly with a message.
-#' 
+#'
 #' @examples
 #' video_file <- system.file("extdata", "sample.mp4", package = "photoextractor")
 #' if (video_file != "") {

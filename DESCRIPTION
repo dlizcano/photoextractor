@@ -19,7 +19,10 @@ Imports:
     av,
     exiftoolr,
     lubridate,
-    methods
+    methods,
+    tesseract,
+    furrr,
+    future
 URL: 
     https://github.com/dlizcano/photoextractor,
     https://dlizcano.github.io/photoextractor/
