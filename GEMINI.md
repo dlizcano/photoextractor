@@ -34,6 +34,7 @@ The package can be useful to convert camera trap videos to image sequences prese
 - Don't define functions inside of functions unless they are very brief.
 - Add explanatory comments to make the code readable. 
 - Implement error messages and follow the tidyverse style guide (https://style.tidyverse.org/errors.html)
+- run styler::style_pkg()
 
 ## Architecture
 

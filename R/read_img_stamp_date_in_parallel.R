@@ -22,10 +22,12 @@ NULL
 #'
 #' @details
 #' The function assumes that the date and time are printed as text on the image and can be
-#' found by Tesseract. Currently, it specifically looks at the last two identified
-#' text elements and parses them using `lubridate::mdy_hms`. It means that it will not 
-#' work well on date and time followed by extra information such as moon phase or temperature. 
-#' For some camera models that print any other text or information after the date and time 
+#' found by the OCR Engine of the package `tesseract`. Currently, it specifically looks 
+#' at the last two identified text elements and parses them using `lubridate::mdy_hms`. 
+#' It means that it will not work well on date and time followed by extra information 
+#' such as moon phase or temperature.  
+#' 
+#' For some camera models that print any other text or extra information after the date and time 
 #' we plan a future fix. 
 #'
 #' @examples

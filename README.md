@@ -3,6 +3,7 @@
 # photoextractor <img src="man/figures/photoextractor_logo_small.png" align="right" alt="photoextractor" />
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/dlizcano/mammalcol/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dlizcano/mammalcol/actions/workflows/R-CMD-check.yaml)
 [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/photoextractor?color=blue)](https://cran.r-project.org/package=photoextractor)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![size](https://img.shields.io/github/languages/code-size/dlizcano/photoextractor.svg)](https://github.com/dlizcano/photoextractor)
